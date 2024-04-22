@@ -11,8 +11,8 @@
                      href="{{ detailLink }}">{{ detail.formattedoem }}</a></span>
         <span><a class="manufacturerInfo" href="javascript:void(0)" id="manufacturerInfo{{ detail.partId }}"
                  data-url="{{ createUrl('aftermarket', 'manufacturerinfo', '' , { 'manufacturerid': detail.manufacturerid }) }}">{{ detail.manufacturer }}</a></span>
-        <span>{{ detail.weight ? 'Weight: ' ~ detail.weight|format_number({fraction_digit: 3}) : '' }}</span>
-        <span>{{ detail.volume ? detail.volume|format_number({fraction_digit: 6}) : '' }}</span>
+        <span>{{ detail.weight ? 'Weight: ' ~ detail.weight|number_format(3, '.', ',') : '' }}</span>
+        <span>{{ detail.volume ? detail.volume|number_format(6, '.', ',') : '' }}</span>
         <span>{{ detail.dimensions ? detail.dimensions.d1 ~ 'X' ~ detail.dimensions.d2 ~ 'X' ~ detail.dimensions.d3 : '' }}</span>
         <br/>
         {% for property in detail.properties %}
