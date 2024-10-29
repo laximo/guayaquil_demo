@@ -9,7 +9,6 @@ class LanguageTemplateEn extends LanguageTemplate
         'welcomeText'                        => 'Please setup login/key data in Config.php',
         'welcomeLinkOem'                     => 'Start demo Laximo.OEM',
         'welcomeLinkAm'                      => 'Start demo Laximo.Aftermarket',
-        'welcomeLinkAuto3nAM'                => 'Start demo Auto3n.Aftermarket',
         'interfaceLanguage'                  => 'Interface language',
         'notfound'                           => 'Search by %s %s has no result',
         'byfindvehicle'                      => 'VIN/FRAME',

@@ -9,7 +9,6 @@ class LanguageTemplateRu extends LanguageTemplate
         'welcomeText'                        => 'Для начала работы необходимо настроить логин/ключ в файле Config.php',
         'welcomeLinkOem'                     => 'Начать просмотр Laximo.OEM',
         'welcomeLinkAm'                      => 'Начать просмотр Laximo.Aftermarket',
-        'welcomeLinkAuto3nAM'                => 'Начать просмотр Auto3n.Aftermarket',
         'interfaceLanguage'                  => 'Язык интерфейса',
         'findOems'                           => 'Поиск детали по OEM',
         'findpartsByName'                    => 'Поиск детали по названию',
