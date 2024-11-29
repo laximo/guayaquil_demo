@@ -35,8 +35,10 @@
                             {% if value == null %}
                                 {% if key == 'brand' %}
                                     {% set value = vehicle.brand %}
-                                {% else %}
+                                {% elseif key == 'name' %}
                                     {% set value = vehicle.name %}
+                                {% else %}
+                                    {% set value = '-' %}
                                 {% endif %}
                             {% endif %}
                             {# {% if key != 'name' and key != 'brand' or (not attr and loop.index > 1) %} #}
