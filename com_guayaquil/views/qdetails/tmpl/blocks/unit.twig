@@ -2,9 +2,7 @@
     {% if oem %}
         {% set cCois = [] %}
         {% for detail in unit.parts %}
-            {% if oem == detail.oem|replace({' ': '', '-': ''})  %}
-                {% set cCois = cCois|merge([detail.codeonimage]) %}
-            {% endif %}
+            {% set cCois = cCois|merge([detail.codeonimage]) %}
         {% endfor %}
     {% endif %}
 

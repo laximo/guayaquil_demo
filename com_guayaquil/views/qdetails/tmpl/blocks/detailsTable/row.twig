@@ -14,7 +14,7 @@
 
     {% set marketUrl = config.backUrl|replace({'{article}': detail.oem|url_encode, '{brand}': vehicle.brand|url_encode }) %}
 
-    <tr class="g_collapsed {{ oem == detail.oem|replace({' ': '', '-': ''}) and oem ? 'g_highlight_lock' : '' }}
+    <tr class="g_collapsed {{ oem ? 'g_highlight_lock' : '' }}
         {{ anotherFromUnit == 'true' ? 'anotherDetail hidden' : '' }}"
         name="{{ detail.codeonimage }}"
         id="d_{{ loop.index }}"
