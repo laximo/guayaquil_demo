@@ -19,7 +19,7 @@
 
                 {% for detail in details %}
                     <tr id="d_{{ detail.codeonimage }}" name="{{ detail.codeonimage }}"
-                        class="g_highlight {% if detail.codeonimage and detail.codeonimage in cois %} g_highlight_lock {% endif %} ">
+                        class="g_highlight {% if (matchDetailOem and matchDetailOem == detail.oem|replace({' ': '', '-': ''})) or (matchDetailOem is empty and detail.codeonimage and detail.codeonimage in cois) %} g_highlight_lock {% endif %} ">
                         <td name="c_pnc"
                             class="g_ttd codeonimage">
                             {% if not variant %}

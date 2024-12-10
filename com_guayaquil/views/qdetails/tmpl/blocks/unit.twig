@@ -2,7 +2,9 @@
     {% if oem %}
         {% set cCois = [] %}
         {% for detail in unit.parts %}
-            {% set cCois = cCois|merge([detail.codeonimage]) %}
+            {% if matchDetailOem == detail.oem|replace({' ': '', '-': ''})  %}
+                {% set cCois = cCois|merge([detail.codeonimage]) %}
+            {% endif %}
         {% endfor %}
     {% endif %}
 
@@ -14,7 +16,8 @@
             'cid': category.categoryid,
             'ssd': unit.ssd,
             'coi': oem ? cCois|join(', ') : code|join(', '),
-            'fromTask': 'qdetails'
+            'fromTask': 'qdetails',
+            'matchDetailOem': matchDetailOem
         })
     %}
 
@@ -28,7 +31,7 @@
             'cid': category.categoryid,
             'f': unit.filter,
             'ssd': unit.ssd,
-            'fromTask' : 'qdetails',
+            'fromTask' : 'qdetails'
         }) %}
     {% endif %}
 

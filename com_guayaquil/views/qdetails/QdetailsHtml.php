@@ -10,18 +10,18 @@ use GuayaquilLib\Oem;
 
 /**
  * @property string gid
- * @property array categories
+ * @property array  categories
  * @property string format
- * @property bool oem
+ * @property bool   oem
  */
 class QdetailsHtml extends View
 {
     public function Display($tpl = 'qdetails', $view = 'view')
     {
         $catalogCode = $this->input->getString('c');
-        $ssd = $this->input->getString('ssd', '');
-        $format = $this->input->getString('format');
-        $vid = $this->input->getString('vid');
+        $ssd         = $this->input->getString('ssd', '');
+        $format      = $this->input->getString('format');
+        $vid         = $this->input->getString('vid');
 //        $cid = $this->input->getString('cid', -1);
         $gid = $this->input->getString('gid');
         $oem = $this->input->getString('oem');
@@ -39,10 +39,12 @@ class QdetailsHtml extends View
 
         $this->pathway->addItem($catalogInfo->getName(), $this->createUrl2($catalogInfo));
         $this->pathway->addItem($vehicle->getName(), $this->createUrl('qgroups', '', '', [
-            'c' => $catalogInfo->getCode(),
+            'c'   => $catalogInfo->getCode(),
             'vid' => $vehicle->getVehicleId(),
             'ssd' => $vehicle->getSsd()
         ]));
+
+        $matchDetailOem = '';
 
         foreach ($details->getCategories() as $category) {
             foreach ($category->getUnits() as $unit) {
@@ -53,18 +55,21 @@ class QdetailsHtml extends View
                     } else {
                         $groups['-'][] = $detail;
                     }
+
+                    $matchDetailOem = $detail->getOem();
                 }
                 $unit->detailsByCode = $groups;
             }
         }
 
         $this->pathway->addItem($this->getLanguage()->t('detailsInGroup'));
-        $this->applicability = (bool)$oem;
-        $this->gid = $this->input->getString('gid', '');
-        $this->details = $details;
-        $this->vehicle = $vehicle;
-        $this->format = $format;
-        $this->oem = $oem;
+        $this->applicability  = (bool)$oem;
+        $this->gid            = $this->input->getString('gid', '');
+        $this->details        = $details;
+        $this->matchDetailOem   = str_replace([' ', '-'], '', $matchDetailOem);
+        $this->vehicle        = $vehicle;
+        $this->format         = $format;
+        $this->oem            = $oem;
 
         parent::Display($tpl, $view);
     }

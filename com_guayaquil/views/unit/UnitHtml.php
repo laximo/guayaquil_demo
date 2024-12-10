@@ -16,11 +16,12 @@ class UnitHtml extends View
 {
     public function Display($tpl = 'unit', $view = 'view')
     {
-        $catalogCode = $this->input->getString('c');
-        $ssd = $this->input->getString('ssd', '');
-        $uid = $this->input->getString('uid');
-        $vid = $this->input->getString('vid');
-        $skipped = $this->input->getString('skipped');
+        $catalogCode    = $this->input->getString('c');
+        $ssd            = $this->input->getString('ssd', '');
+        $uid            = $this->input->getString('uid');
+        $vid            = $this->input->getString('vid');
+        $skipped        = $this->input->getString('skipped');
+        $matchDetailOem = $this->input->getString('matchDetailOem');
 
         /** @var UnitObject $unit */
         /** @var PartListObject $details */
@@ -49,22 +50,23 @@ class UnitHtml extends View
         $this->pathway->addItem($vehicle->getName(), !$skipped ? $this->createUrl($catalogInfo->getQuickGroupsFeature() != null ? 'qgroups' : 'vehicle', '', '', ['c' => $catalogCode, 'vid' => $vid, 'ssd' => $ssd]) : '');
         $this->pathway->addItem($unit->getName());
 
-        $this->vehicle = $vehicle;
-        $this->cataloginfo = $catalogInfo;
-        $this->unit = $unit;
-        $this->imagemap = $imageMap->getMapObjects();
-        $this->detailCodes = $detailCodes;
-        $this->details = $details->getParts();
-        $this->catalog = $this->input->getString('c');
-        $this->vid = $this->input->getString('vid', '');
-        $this->gid = $this->input->getString('gid', '');
-        $this->cid = $this->input->getString('cid', '');
-        $this->selectedCoi = $this->input->getString('coi', '');
-        $this->cois = $this->input->getString('coi') ? explode(', ',
+        $this->vehicle          = $vehicle;
+        $this->cataloginfo      = $catalogInfo;
+        $this->unit             = $unit;
+        $this->imagemap         = $imageMap->getMapObjects();
+        $this->detailCodes      = $detailCodes;
+        $this->details          = $details->getParts();
+        $this->catalog          = $this->input->getString('c');
+        $this->vid              = $this->input->getString('vid', '');
+        $this->gid              = $this->input->getString('gid', '');
+        $this->cid              = $this->input->getString('cid', '');
+        $this->selectedCoi      = $this->input->getString('coi', '');
+        $this->cois             = $this->input->getString('coi') ? explode(', ',
             $this->input->getString('coi')) : '';
-        $this->fromCatalogTask = $fromCatalogTask;
-        $this->corrected = $this->input->getString('corrected');
+        $this->fromCatalogTask  = $fromCatalogTask;
+        $this->corrected        = $this->input->getString('corrected');
         $this->useApplicability = $catalogInfo->getDetailApplicabilityFeature() != null;
+        $this->matchDetailOem   = str_replace([' ', '-'], '', $matchDetailOem);
 
         parent::Display($tpl, $view);
     }
