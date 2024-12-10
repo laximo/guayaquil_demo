@@ -56,7 +56,10 @@ class QdetailsHtml extends View
                         $groups['-'][] = $detail;
                     }
 
-                    $matchDetailOem = $detail->getOem();
+                    if ($detail->getMatch()) {
+                        $matchDetailOem = $detail->getOem();
+                    }
+
                 }
                 $unit->detailsByCode = $groups;
             }
