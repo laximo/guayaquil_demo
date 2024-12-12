@@ -56,7 +56,7 @@ class QdetailsHtml extends View
                         $groups['-'][] = $detail;
                     }
 
-                    if ($detail->getMatch()) {
+                    if ($oem && $detail->getMatch()) {
                         $matchDetailOem = $detail->getOem();
                     }
 
