@@ -49,9 +49,10 @@ class AftermarketHtml extends View
 
         if ($oem || $detailId) {
             if ($detailId) {
-                $data = $this->getAmService()->findPart($detailId, $options, $replacementtypes, $this->getLanguage()->getLocalization());
-                $oem = $data->getOems()[0]->getOem();
-                $brand = $data->getOems()[0]->getManufacturer();
+                $data  = $this->getAmService()->findPart($detailId, $options, $replacementtypes, $this->getLanguage()->getLocalization());
+                $oems  = $data->getOems();
+                $oem   = $oems ? $data->getOems()[0]->getOem() : null;
+                $brand = $oems ? $data->getOems()[0]->getManufacturer() : null;
             } else {
                 $data = $this->getAmService()->findOem($oem, $brand, $options, $replacementtypes, $this->getLanguage()->getLocalization());
             }
