@@ -43,8 +43,8 @@ class AftermarketHtml extends View
         $brand = $this->input->getString('brand');
         $detailId = $this->input->getString('detail_id');
         $input = $this->input->getArray();
-        $options = isset($input['options']) && is_array($input['options'])  ? $input['options'] : ['crosses','weights','names','properties','images'];
-        $replacementtypes = isset($input['replacementtypes']) && is_array($input['replacementtypes']) ? $input['replacementtypes'] : ['synonym', 'PartOfTheWhole', 'Replacement', 'Duplicate', 'Bidirectional', 'Tuning'];
+        $options = isset($input['options']) && is_array($input['options'])  ? $input['options'] : ['crosses', 'images'];
+        $replacementtypes = isset($input['replacementtypes']) && is_array($input['replacementtypes']) ? $input['replacementtypes'] : ['PartOfTheWhole', 'Replacement'];
         $data = [];
 
         if ($oem || $detailId) {
