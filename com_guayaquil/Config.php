@@ -82,7 +82,7 @@ class Config
     ];
 
     public $oemExample;
-    public $plateExample = 'А001БГ97';
+    public $plateExample = 'Н248АТ797';
 
     protected static $config = null;
 
