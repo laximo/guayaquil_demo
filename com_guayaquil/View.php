@@ -55,7 +55,7 @@ class View
     /**
      * @var String
      */
-    public $page_title = 'Guayaqul demo';
+    public $page_title = 'Guayaquil demo';
 
     public function __construct()
     {
