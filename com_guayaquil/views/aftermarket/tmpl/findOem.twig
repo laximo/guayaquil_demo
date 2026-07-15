@@ -84,8 +84,8 @@
                    href="{{ replacementDetailLink }}">{{ replacement.part.formattedoem ? replacement.part.formattedoem : '' }}</a>
             </td>
             <td>{{ replacement.part.name ? replacement.part.name : '' }}</td>
-            <td>{{ replacement.part.weight ? replacement.part.weight : '' }}</td>
-            <td>{{ replacement.part.volume ? replacement.part.volume : '' }}</td>
+            <td>{{ replacement.part.weight ? replacement.part.weight|number_format(3, '.', ',') : '' }}</td>
+            <td>{{ replacement.part.volume ? replacement.part.volume|number_format(6, '.', ',') : '' }}</td>
             <td>{{ replacement.part.dimensions ? replacement.part.dimensions.d1 ~ 'X' ~ replacement.part.dimensions.d2 ~ 'X' ~ replacement.part.dimensions.d3 : '' }}</td>
         </tr>
         {% endfor %}
