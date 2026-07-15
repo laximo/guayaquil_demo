@@ -2334,6 +2334,9 @@ tr.g_highlight_lock div.info {
     overflow: hidden;
     min-height: 50px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .aftermarket-detail-image:not(:first-child) {
