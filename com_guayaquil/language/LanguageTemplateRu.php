@@ -43,6 +43,7 @@ class LanguageTemplateRu extends LanguageTemplate
         'searchbyoemtab'                     => 'Поиск по ОЕМ',
         'searchbyoemexample'                 => 'Введите OEM номер, например, %s',
         'searchbyplateexample'               => 'Введите государственный регистрационный номер, например, %s',
+        'customoperationexample'             => 'Пример %s',
         'search by wizard'                   => 'Поиск автомобиля по параметрам',
         'findfailed'                         => 'Поиск по %s ничего не дал',
         'findby'                             => 'Поиск по %s',

@@ -111,6 +111,7 @@ class LanguageTemplateEn extends LanguageTemplate
         'searchbycode'                       => 'search by code',
         'searchbyoemexample'                 => 'Please, enter OEM, for example %s',
         'searchbyplateexample'               => 'Please, enter plate number, for example %s',
+        'customoperationexample'             => 'Example %s',
         'needconfirm'                        => 'Need confirm',
         'refineparams'                       => 'Refine vehicle parameters',
         'selectfromdropdown'                 => 'Select from dropdown list',

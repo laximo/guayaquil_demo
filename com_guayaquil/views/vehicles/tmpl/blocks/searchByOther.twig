@@ -6,6 +6,9 @@
     {% apply spaceless %}
         <div class="find">
             <h2>{{ operation.description }}</h2>
+            {% if operation.example is not empty %}
+                <span class="example gray">{{ 'customoperationexample'|t(operation.example) }}</span>
+            {% endif %}
             <form name="findByCustom" method="GET"
                   onsubmit="return checkCustomForm(this, jQuery('input [type=submit]'));">
                 <input type="hidden" name="task" value="vehicles">
