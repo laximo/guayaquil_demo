@@ -7,9 +7,36 @@
   "require-dev": {
   },
   "require": {
-    "twig/twig": "^3.0",
+    "php": ">=7.3",
+    "twig/twig": ">=3.11.3 <3.12.0",
     "ext-json": "*",
     "ext-simplexml": "*",
     "laximo/guayaquillib": "^3.0"
+  },
+  "config": {
+    "platform": {
+      "php": "7.3.0"
+    },
+    "policy": {
+      "advisories": {
+        "ignore-id": {
+          "PKSA-8zx5-v2nz-58pb": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-fbvq-z33h-r2np": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-g9zw-qxh8-pq8w": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-yd6k-t2gh-1m43": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-1tmc-rt7x-12w6": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-xx6c-6d96-db2w": "Profiler XSS. Demo does not enable the Twig profiler. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-sjvz-tbbr-vwth": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-h8hf-ytnd-5t9q": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-wwb1-81rc-pd65": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-kvv6-36cr-fkzb": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-n14z-jjjg-g8vd": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-3mcc-k66d-pydb": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-gw7n-z4yx-7xjt": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-dpx1-78wg-1kqs": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3.",
+          "PKSA-21g2-dzjv-sky5": "Sandbox-only. Demo does not enable Twig sandbox. 3.11.3 is the last Twig 3 release that runs on PHP 7.3."
+        }
+      }
+    }
   }
 }

@@ -23,9 +23,13 @@ class User
     {
         if ($storedData) {
             $data = json_decode($storedData, true);
-            $this->userName = $data['login'];
-            $this->password = $data['password'];
-            $this->services = $data['services'];
+            if (!is_array($data)) {
+                return;
+            }
+
+            $this->userName = isset($data['login']) ? (string)$data['login'] : '';
+            $this->password = isset($data['password']) ? (string)$data['password'] : '';
+            $this->services = (isset($data['services']) && is_array($data['services'])) ? $data['services'] : [];
         }
     }
 

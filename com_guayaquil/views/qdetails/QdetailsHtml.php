@@ -45,6 +45,13 @@ class QdetailsHtml extends View
      */
     public $oem;
 
+    /**
+     * Группы деталей по коду на картинке: [индекс категории][индекс узла].
+     *
+     * @var array
+     */
+    public $detailsByCode = [];
+
     public function Display($tpl = 'qdetails', $view = 'view')
     {
         $catalogCode = $this->input->getString('c');
@@ -75,7 +82,9 @@ class QdetailsHtml extends View
 
         $matchDetailOem = '';
 
+        $categoryIndex = 0;
         foreach ($details->getCategories() as $category) {
+            $unitIndex = 0;
             foreach ($category->getUnits() as $unit) {
                 $groups = [];
                 foreach ($unit->getParts() as $detail) {
@@ -90,8 +99,10 @@ class QdetailsHtml extends View
                     }
 
                 }
-                $unit->detailsByCode = $groups;
+                $this->detailsByCode[$categoryIndex][$unitIndex] = $groups;
+                $unitIndex++;
             }
+            $categoryIndex++;
         }
 
         $this->pathway->addItem($this->getLanguage()->t('detailsInGroup'));

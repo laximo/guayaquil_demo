@@ -68,6 +68,7 @@
 
                     <div class="row_wrapper">
                         {{ block('unit') }}
+                        {% set unitDetailsByCode = detailsByCode[loop.parent.loop.index0][loop.index0]|default([]) %}
                         {{ block('detailsTable') }}
                     </div>
                 {% endfor %}

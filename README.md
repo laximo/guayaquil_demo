@@ -4,7 +4,7 @@ Read the documentation for details: [doc.laximo.ru](https://doc.laximo.ru)
 
 **Requirements:**
 
-* PHP 7.0 +
+* PHP 7.3 + (проверено до PHP 8.5)
 * php-soap
 * php-xml
 

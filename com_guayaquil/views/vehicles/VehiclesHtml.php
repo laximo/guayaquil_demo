@@ -110,6 +110,11 @@ class VehiclesHtml extends View
     /**
      * @var array
      */
+    public $vehicleChildren = [];
+
+    /**
+     * @var array
+     */
     public $originals;
 
     /**
@@ -166,7 +171,7 @@ class VehiclesHtml extends View
                 break;
             case 'execCustomOperation':
                 $notFoundData = $this->input->get('data');
-                $msg = implode('-', $notFoundData);
+                $msg = implode('-', is_array($notFoundData) ? $notFoundData : []);
                 $type = [
                     'name' => $this->getLanguage()->t($operation),
                     'value' => $msg
@@ -356,25 +361,30 @@ class VehiclesHtml extends View
         }
 
         $groupedByName = [];
+        $vehicleChildren = [];
         foreach ($vehicles->getVehicles() as $vehicle) {
-            if (!isset($groupedByName[$vehicle->getName()])) {
-                $groupedByName[$vehicle->getName()] = $vehicle;
-            } else {
-                if ($groupedByName[$vehicle->getName()] !== $vehicle) {
-                    $groupedByName[$vehicle->getName()]->children[] = $vehicle;
-                }
+            $name = $vehicle->getName();
+            if (!isset($groupedByName[$name])) {
+                $groupedByName[$name] = $vehicle;
+            } elseif ($groupedByName[$name] !== $vehicle) {
+                $vehicleChildren[$name][] = $vehicle;
             }
         }
 
         $this->headers = $tableHeader;
         $this->groupedVehicles = $groupedByName;
+        $this->vehicleChildren = $vehicleChildren;
     }
 
     public function checkDetailApplicability()
     {
         $data = $this->input->formData();
-        $details = json_decode($data['details'], true);
-        $catalog = $data['catalog'];
+        $rawDetails = isset($data['details']) ? $data['details'] : '';
+        $details = json_decode(is_string($rawDetails) ? $rawDetails : '', true);
+        if (!is_array($details)) {
+            $details = [];
+        }
+        $catalog = isset($data['catalog']) ? $data['catalog'] : '';
         $detailsChecked = [];
         $detailsToShow = [];
         $toCheck = 5;

@@ -40,6 +40,13 @@ class ApplicabilitydetailsHtml extends View
      */
     public $oem;
 
+    /**
+     * Группы деталей по коду на картинке: [индекс категории][индекс узла].
+     *
+     * @var array
+     */
+    public $detailsByCode = [];
+
     public function Display($tpl = 'applicabilitydetails', $view = 'view')
     {
         $this->displayApplicabilityDetails();
@@ -73,7 +80,9 @@ class ApplicabilitydetailsHtml extends View
             'checkQG' => true
         ]);
 
+        $categoryIndex = 0;
         foreach ($details->getCategories() as $category) {
+            $unitIndex = 0;
             foreach ($category->getUnits() as $unit) {
                 $groups = [];
                 foreach ($unit->getParts() as $detail) {
@@ -83,8 +92,10 @@ class ApplicabilitydetailsHtml extends View
                         $groups['-'][] = $detail;
                     }
                 }
-                $unit->detailsByCode = $groups;
+                $this->detailsByCode[$categoryIndex][$unitIndex] = $groups;
+                $unitIndex++;
             }
+            $categoryIndex++;
         }
 
         $this->pathway->addItem($vehicle->getBrand() . ' ' . $vehicle->getName(), $vehicleLink);

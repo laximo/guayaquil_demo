@@ -35,7 +35,7 @@ class View
     /**
      * @var int
      */
-    public $lastExecutionTime;
+    public $lastExecutionTime = 0;
 
     /**
      * @var string[]

@@ -5,14 +5,14 @@ namespace guayaquil\modules;
 
 class Input
 {
-    public function getString($arg, $default = false): string
+    public function getString($arg, $default = ''): string
     {
-        return isset($_GET[$arg]) ? (string)$_GET[$arg] : $default;
+        return isset($_GET[$arg]) ? (string)$_GET[$arg] : (string)$default;
     }
 
-    public function getInt($arg, $default = false): int
+    public function getInt($arg, $default = 0): int
     {
-        return isset($_GET[$arg]) ? (int)$_GET[$arg] : $default;
+        return isset($_GET[$arg]) ? (int)$_GET[$arg] : (int)$default;
     }
 
     public function get($arg)
