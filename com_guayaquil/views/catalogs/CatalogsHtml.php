@@ -5,18 +5,47 @@ namespace guayaquil\views\catalogs;
 use guayaquil\Config;
 use guayaquil\View;
 
-/**
- * @property string frameExample
- * @property string vinExample
- * @property array catalogs
- * @property int columns
- * @property float elemInRow
- * @property int elemCount
- * @property int rest
- * @property string oemExample
- */
 class CatalogsHtml extends View
 {
+    /**
+     * @var string
+     */
+    public $frameExample;
+
+    /**
+     * @var string
+     */
+    public $vinExample;
+
+    /**
+     * @var array
+     */
+    public $catalogs;
+
+    /**
+     * @var int
+     */
+    public $columns;
+
+    /**
+     * @var float
+     */
+    public $elemInRow;
+
+    /**
+     * @var int
+     */
+    public $elemCount;
+
+    /**
+     * @var int
+     */
+    public $rest;
+
+    /**
+     * @var string
+     */
+    public $oemExample;
 
     public function Display($tpl = 'catalogs', $view = 'view')
     {

@@ -3,15 +3,31 @@
 namespace guayaquil\views\unitfilter;
 
 use guayaquil\View;
+use GuayaquilLib\objects\oem\UnitObject;
 use GuayaquilLib\Oem;
 
-/**
- * @property array filter_data
- * @property array from
- * @property string fromTask
- */
 class UnitfilterHtml extends View
 {
+    /**
+     * @var array
+     */
+    public $filter_data;
+
+    /**
+     * @var UnitObject
+     */
+    public $unit;
+
+    /**
+     * @var array
+     */
+    public $from;
+
+    /**
+     * @var string
+     */
+    public $fromTask;
+
     public function Display($tpl = 'unitfilter', $view = 'view')
     {
         $catalogCode = $this->input->getString('c');

@@ -10,6 +10,36 @@ use GuayaquilLib\Oem;
 
 class ApplicabilitydetailsHtml extends View
 {
+    /**
+     * @var bool
+     */
+    public $applicability;
+
+    /**
+     * @var string
+     */
+    public $gid;
+
+    /**
+     * @var QuickDetailListObject
+     */
+    public $details;
+
+    /**
+     * @var VehicleObject
+     */
+    public $vehicle;
+
+    /**
+     * @var string
+     */
+    public $format;
+
+    /**
+     * @var string
+     */
+    public $oem;
+
     public function Display($tpl = 'applicabilitydetails', $view = 'view')
     {
         $this->displayApplicabilityDetails();

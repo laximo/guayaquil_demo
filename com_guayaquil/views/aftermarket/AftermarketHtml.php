@@ -6,15 +6,38 @@ namespace guayaquil\views\aftermarket;
 use guayaquil\View;
 use GuayaquilLib\objects\am\PartListObject;
 
-/**
- * @property string $oem
- * @property string $brand
- * @property false|string[] $options
- * @property array|mixed $replacementtypes
- * @property PartListObject[] $details
- */
 class AftermarketHtml extends View
 {
+    /**
+     * @var object
+     */
+    public $manufacturerInfo;
+
+    /**
+     * @var string
+     */
+    public $oem;
+
+    /**
+     * @var string
+     */
+    public $brand;
+
+    /**
+     * @var array
+     */
+    public $options;
+
+    /**
+     * @var array
+     */
+    public $replacementtypes;
+
+    /**
+     * @var PartListObject[]
+     */
+    public $details = [];
+
     public function Display($tpl = 'aftermarket', $view = 'view')
     {
         $view = $this->input->getString('view', 'view');

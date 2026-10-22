@@ -8,14 +8,43 @@ use GuayaquilLib\objects\oem\QuickDetailListObject;
 use GuayaquilLib\objects\oem\VehicleObject;
 use GuayaquilLib\Oem;
 
-/**
- * @property string gid
- * @property array  categories
- * @property string format
- * @property bool   oem
- */
 class QdetailsHtml extends View
 {
+    /**
+     * @var bool
+     */
+    public $applicability;
+
+    /**
+     * @var string
+     */
+    public $gid;
+
+    /**
+     * @var QuickDetailListObject
+     */
+    public $details;
+
+    /**
+     * @var string
+     */
+    public $matchDetailOem;
+
+    /**
+     * @var VehicleObject
+     */
+    public $vehicle;
+
+    /**
+     * @var string
+     */
+    public $format;
+
+    /**
+     * @var string
+     */
+    public $oem;
+
     public function Display($tpl = 'qdetails', $view = 'view')
     {
         $catalogCode = $this->input->getString('c');

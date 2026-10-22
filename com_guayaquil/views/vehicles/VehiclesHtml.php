@@ -15,11 +15,113 @@ use GuayaquilLib\objects\oem\VehicleListObject;
 use GuayaquilLib\Oem;
 use stdClass;
 
-/**
- * @property string notFoundReason
- */
 class VehiclesHtml extends View
 {
+    /**
+     * @var array
+     */
+    public $catalogNames;
+
+    /**
+     * @var array
+     */
+    public $catalogsCodes;
+
+    /**
+     * @var string
+     */
+    public $searchBy;
+
+    /**
+     * @var string
+     */
+    public $vin;
+
+    /**
+     * @var string
+     */
+    public $frameNo;
+
+    /**
+     * @var array
+     */
+    public $type;
+
+    /**
+     * @var CatalogObject|null
+     */
+    public $cataloginfo;
+
+    /**
+     * @var int
+     */
+    public $useApplicability;
+
+    /**
+     * @var array
+     */
+    public $vehicles;
+
+    /**
+     * @var string
+     */
+    public $brandName;
+
+    /**
+     * @var array
+     */
+    public $columns;
+
+    /**
+     * @var string
+     */
+    public $oem;
+
+    /**
+     * @var mixed
+     */
+    public $customOperationValue;
+
+    /**
+     * @var string
+     */
+    public $ident;
+
+    /**
+     * @var string
+     */
+    public $oemExample;
+
+    /**
+     * @var bool
+     */
+    public $showGrouppedVehicle;
+
+    /**
+     * @var array
+     */
+    public $headers;
+
+    /**
+     * @var array
+     */
+    public $groupedVehicles;
+
+    /**
+     * @var array
+     */
+    public $originals;
+
+    /**
+     * @var array
+     */
+    public $brands;
+
+    /**
+     * @var string
+     */
+    public $notFoundReason;
+
     public function Display($tpl = 'vehicles', $view = 'view')
     {
         if ($this->input->getString('view') === 'checkDetailApplicability') {
@@ -104,12 +206,6 @@ class VehiclesHtml extends View
                     $this->catalogNames = [];
                     $this->catalogsCodes = [];
 
-                    $catalogsList = $this->getOemService()->listCatalogs();
-                    foreach ($catalogsList->getCatalogs() as $catalog) {
-                        $this->catalogsCodes[$catalog->getBrand()] = $catalog->getCode();
-                        $this->catalogNames[$catalog->getCode()] = $catalog->getName();
-                    }
-
                     try {
                         $catalogs = $this->getOemService()->findCatalogsByOem($oem);
                     } catch (StandardPartException $ex) {
@@ -121,16 +217,17 @@ class VehiclesHtml extends View
                     if ($catalogs->getReferences() && count($catalogs->getReferences())) {
                         $originals = $catalogs->getReferences();
 
-                        if (!$brand) {
-                            if ($originals) {
-                                $this->displayVehicleBrands($originals);
-                            }
+                        if (!$brand && $originals) {
+                            $this->loadCatalogMaps();
+                            $this->displayVehicleBrands($originals);
                         }
                     } else {
                         $amDetails = $this->getAmService()->findOem($oem, '', [Am::optionsCrosses]);
+                        $oems = $amDetails->getOems();
 
-                        if (!empty($amDetails->getOems())) {
-                            $brands = $this->getDetailBrands($amDetails->getOems());
+                        if ($this->detailsHaveReplacements($oems)) {
+                            $this->loadCatalogMaps();
+                            $brands = $this->getDetailBrands($oems);
                             if ($brands && is_array($brands) && count($brands)) {
                                 $this->displayDetailBrand($brands);
                             }
@@ -340,12 +437,39 @@ class VehiclesHtml extends View
         die();
     }
 
+    private function loadCatalogMaps(): void
+    {
+        $catalogsList = $this->getOemService()->listCatalogs();
+        foreach ($catalogsList->getCatalogs() as $catalog) {
+            $this->catalogsCodes[$catalog->getBrand()] = $catalog->getCode();
+            $this->catalogNames[$catalog->getCode()] = $catalog->getName();
+        }
+    }
+
+    /**
+     * @param PartObject[] $details
+     */
+    private function detailsHaveReplacements(array $details): bool
+    {
+        foreach ($details as $detail) {
+            if (!empty($detail->getReplacements())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * @param PartObject[] $details
      * @return array
      */
     private function getDetailBrands(array $details)
     {
+        if (!$this->detailsHaveReplacements($details)) {
+            return [];
+        }
+
         $amManufacturers = $this->getAmService()->listManufacturer();
         $catalogs = $this->getOemService()->listCatalogs();
         $catalogNames = [];

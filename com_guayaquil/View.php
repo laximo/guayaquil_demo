@@ -57,6 +57,11 @@ class View
      */
     public $page_title = 'Guayaquil demo';
 
+    /**
+     * @var string
+     */
+    public $service;
+
     public function __construct()
     {
         $this->input = new Input();
