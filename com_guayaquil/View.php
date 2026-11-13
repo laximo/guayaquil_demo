@@ -46,7 +46,14 @@ class View
      * @var string[]
      */
     public $lastExecutionResponse = [];
-    
+
+    /**
+     * Operation and field examples from the catalog response: operation name => example, fields.
+     *
+     * @var array<string, array{example: string, fields: array<string, string>}>
+     */
+    public $operationFieldExamples = [];
+
     /**
      * @var Config
      */
@@ -243,7 +250,61 @@ class View
             return;
         }
 
+        $this->operationFieldExamples = $this->collectOperationFieldExamples();
+
         $this->renderPage($tpl, $view, array_merge((array)$this, $vars), $raw);
+    }
+
+    /**
+     * The library drops example on an operation field, so the attribute is read from the raw XML.
+     *
+     * @return array<string, array{example: string, fields: array<string, string>}>
+     */
+    protected function collectOperationFieldExamples(): array
+    {
+        $examples = [];
+
+        foreach ($this->lastExecutionResponse as $xmlString) {
+            $xml = @simplexml_load_string($xmlString);
+            if (!$xml instanceof \SimpleXMLElement) {
+                continue;
+            }
+
+            $operations = $xml->xpath('//operations/operation');
+            if ($operations === false) {
+                continue;
+            }
+
+            foreach ($operations as $operation) {
+                $name = (string)$operation['name'];
+                if ($name === '') {
+                    continue;
+                }
+
+                if (!isset($examples[$name])) {
+                    $examples[$name] = [
+                        'example' => '',
+                        'fields' => [],
+                    ];
+                }
+
+                $operationExample = (string)($operation['example'] ?? '');
+                if ($operationExample !== '') {
+                    $examples[$name]['example'] = $operationExample;
+                }
+
+                foreach ($operation->field as $field) {
+                    $fieldName = (string)$field['name'];
+                    if ($fieldName === '') {
+                        continue;
+                    }
+
+                    $examples[$name]['fields'][$fieldName] = (string)($field['example'] ?? '');
+                }
+            }
+        }
+
+        return $examples;
     }
 
     public function renderPage(string $tpl = 'tmpl', string $view = '', array $vars = [], bool $raw = false)

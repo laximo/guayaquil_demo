@@ -5,9 +5,12 @@
     {% endfor %}
     {% apply spaceless %}
         <div class="find">
+            {% set operationMeta = operationFieldExamples[operation.name]|default({}) %}
+            {% set fieldExamples = operationMeta.fields|default({}) %}
+            {% set operationExample = operationMeta.example|default('') %}
             <h2>{{ operation.description }}</h2>
-            {% if operation.example is not empty %}
-                <span class="example gray">{{ 'customoperationexample'|t(operation.example) }}</span>
+            {% if operationExample is not empty %}
+                <span class="example gray">{{ 'customoperationexample'|t(operationExample) }}</span>
             {% endif %}
             <form name="findByCustom" method="GET"
                   onsubmit="return checkCustomForm(this, jQuery('input [type=submit]'));">
@@ -18,7 +21,13 @@
                     {% if count > 1 %}
                         <tr>
                             {% for field in operation.fields %}
-                                <th align="left"><span>{{ field.description }}</span></th>
+                                <th align="left">
+                                    <span>{{ field.description }}</span>
+                                    {% set fieldExample = fieldExamples[field.name]|default('') %}
+                                    {% if fieldExample is not empty %}
+                                        <span class="example gray">{{ 'customoperationexample'|t(fieldExample) }}</span>
+                                    {% endif %}
+                                </th>
                                 <th></th>
                             {% endfor %}
                         </tr>
@@ -41,7 +50,13 @@
                     {% else %}
                         {% for field in operation.fields %}
                             <tr class="guayaquil_SelectedRow">
-                                <td><span>{{ field.description|t }}</span></td>
+                                <td>
+                                    <span>{{ field.description|t }}</span>
+                                    {% set fieldExample = fieldExamples[field.name]|default('') %}
+                                    {% if fieldExample is not empty %}
+                                        <span class="example gray">{{ 'customoperationexample'|t(fieldExample) }}</span>
+                                    {% endif %}
+                                </td>
                                 <td>
                                     <div class="g_input">
                                         <input type="text" name="data[{{ field.name|t }}]" value=""
